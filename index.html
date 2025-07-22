@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To Shreya, From Abhiraj 💖</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ---- RESET & BASE ---- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Raleway',sans-serif;
+      background:linear-gradient(135deg,#ffe1e1 0%,#f3e5f5 100%);
+      color:#333;
+      overflow-x:hidden;
+    }
+    h1{font-family:'Pacifico',cursive;}/* ---- LOADING SCREEN ---- */
+#loader{
+  position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
+  background:#fff;z-index:9999;flex-direction:column;gap:1rem;
+  animation:fadeOut 1s ease 2.5s forwards;
+}
+#loader h1{font-size:2rem;color:#ff69b4;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* ---- HEADER ---- */
+header{padding:4rem 1rem;text-align:center;background:#fff5f8;box-shadow:0 4px 10px rgba(0,0,0,.1);}  
+header h1{font-size:2.8rem;margin-bottom:.5rem;}
+#quoteBox{font-size:1.3rem;color:#7b2cbf;font-style:italic;min-height:3.2rem;transition:opacity .5s;}
+
+/* ---- GALLERY ---- */
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem;padding:3rem 1rem;}
+.gallery img{width:270px;height:360px;object-fit:cover;border-radius:1.25rem;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .3s,box-shadow .3s;}
+.gallery img:hover{transform:scale(1.05) rotate(.5deg);box-shadow:0 10px 20px rgba(0,0,0,.3)}
+
+/* ---- LETTER ---- */
+.letter{max-width:800px;margin:0 auto 3rem;background:#fff0f6;border-radius:1.25rem;padding:2rem 2.5rem;font-size:1.1rem;line-height:1.7;box-shadow:0 4px 15px rgba(0,0,0,.1);} 
+
+/* ---- SURPRISE BUTTON ---- */
+.surprise{text-align:center;margin:3rem 0;}
+.surprise button{background:#ff69b4;color:#fff;font-size:1.25rem;border:none;padding:1rem 2rem;border-radius:2rem;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.2);transition:transform .2s;background-image:linear-gradient(45deg,#ff69b4 0%,#ff85c1 100%);} 
+.surprise button:hover{transform:scale(1.1);} 
+.popup{display:none;margin-top:1.5rem;font-size:1.35rem;color:#d63384;animation:fadeIn 1s forwards;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ---- END FOOTER ---- */
+footer{text-align:center;background:#ffe4ec;padding:2rem;font-weight:700;font-size:1.1rem;}
+
+/* ---- COMPLIMENT RAIN ---- */
+.compliment{position:fixed;top:-2rem;font-size:1rem;color:#ff1493;white-space:nowrap;pointer-events:none;animation:drop 8s linear forwards;} 
+@keyframes drop{to{transform:translateY(110vh);opacity:0}}
+
+  </style>
+</head>
+<body><!-- LOADING SCREEN --><div id="loader">
+  <h1>Loading love & memories…</h1>
+</div><!-- BACKGROUND MUSIC --><audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio><!-- COMPLIMENT RAIN CONTAINER (dynamic via JS) --><div id="compliment-container"></div><header>
+  <h1>To Shreya 💖</h1>
+  <div id="quoteBox"></div>
+</header><!-- PHOTO MEMORY GALLERY --><section class="gallery" id="gallery">
+  <!-- Replace these src values with actual filenames once you add photos in the same folder -->
+  <img src="https://source.unsplash.com/270x360/?best-friends" alt="Memory 1"/>
+  <img src="https://source.unsplash.com/270x360/?friends,smile" alt="Memory 2"/>
+</section><!-- PERSONAL LETTER SECTION --><section class="letter">
+  <p>Dear Shreya,</p>
+  <p>You are not just a friend — you're a part of my soul. You're my peace in chaos, my spark in silence. Every moment with you becomes a memory I treasure, and every laugh we share becomes part of my heartbeat.</p>
+  <p>I hope this little page makes you smile as much as your presence lights up my life. You mean more to me than these words could ever express.</p>
+  <p>Stay magical. Stay you. Forever your Abhiraj 💌</p>
+</section><!-- SURPRISE BUTTON --><div class="surprise">
+  <button onclick="showPopup()">Click Me 💖</button>
+  <div id="popup" class="popup">You’re my favorite person in this whole world! 🌍💫</div>
+</div><!-- END MESSAGE --><footer>
+  You are special, always and forever. — Abhiraj
+</footer><!-- JAVASCRIPT MAGIC --><script>
+// 1️⃣ Quote Carousel
+const quotes=[
+  "You're not just my best friend — you're my chosen family.",
+  "If I had to choose again, I'd choose you every time.",
+  "You shine so bright, you light up my darkest days.",
+  "In the story of my life, every best chapter starts with you."  
+];
+let qi=0;
+const quoteBox=document.getElementById('quoteBox');
+function switchQuote(){
+  quoteBox.style.opacity=0;
+  setTimeout(()=>{
+    quoteBox.textContent=quotes[qi];
+    quoteBox.style.opacity=1;
+    qi=(qi+1)%quotes.length;
+  },500);
+}
+quoteBox.textContent=quotes[0];
+setInterval(switchQuote,4000);
+
+// 2️⃣ Compliment Rain
+const compliments=["beautiful","caring","funny","brilliant","kind","awesome","lovely","amazing","radiant","incredible"];
+function dropCompliment(){
+  const span=document.createElement('span');
+  span.className='compliment';
+  span.textContent=compliments[Math.floor(Math.random()*compliments.length)];
+  span.style.left=Math.random()*100+'vw';
+  span.style.fontSize=Math.random()*0.8+0.8+'rem';
+  document.body.appendChild(span);
+  setTimeout(()=>span.remove(),8000);
+}
+setInterval(dropCompliment,800);
+
+// 3️⃣ Surprise Popup
+function showPopup(){ document.getElementById('popup').style.display='block'; }
+</script></body>
+</html>
